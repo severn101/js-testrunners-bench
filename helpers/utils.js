@@ -49,14 +49,15 @@ exports.expandArrayProps = function expandArrayProps(obj) {
 exports.measureCmd = function measureCmd(cmd, count = 1) {
   const values = [];
   for (let i = 0; i < count; i++) {
-    const proc = exec(`time ${cmd}`, {silent: true});
+    const proc = exec(`time node_modules/.bin/${cmd}`, {silent: true});
     assertCmdOutput(cmd, proc.stderr);
     assertCmdOutput(cmd, proc.stdout);
 
-    const matches = proc.stderr.match(/real\s+([0-9]+)m([0-9\.]+)s/);
+    const matches = proc.stderr.match(/([0-9]+):([0-9]+)\.([0-9]+)elapsed/);
     const minutes = parseInt(matches[1], 10);
-    const seconds = parseFloat(matches[2]);
-    const total = minutes * 60 + seconds;
+    const seconds = parseInt(matches[2], 10);
+    const milliseconds = parseFloat(matches[3]);
+    const total = minutes * 60 + seconds + milliseconds / 1000;
     values.push(total);
   }
   const sum = values.reduce((r, value) => r + value, 0);
