@@ -28,7 +28,7 @@ function writeConfigFile(testsPath, runInfo) {
   };
 
   if (runInfo.babel) {
-    config.helpers = [path.resolve('./node_modules/babel-register/lib/node.js')];
+    config.helpers = [path.resolve('./node_modules/@babelregister/lib/node.js')];
   }
 
   const filename = './temp/jasmine.json';

@@ -19,8 +19,8 @@ module.exports = [
   {
     name: 'babel=true',
     runs: [
-      {runner: 'mocha', cmd: 'mocha {path} --compilers js:babel-register'},
-      {runner: 'mocha-parallel-tests', cmd: 'mocha-parallel-tests {path} --compilers js:babel-register'},
+      {runner: 'mocha', cmd: 'mocha {path} --compilers js:@babel/register'},
+      {runner: 'mocha-parallel-tests', cmd: 'mocha-parallel-tests {path} --compilers js:@babel/register'},
       {runner: 'jasmine', cmd: 'jasmine JASMINE_CONFIG_PATH=temp/jasmine.json', babel: true},
       {runner: 'lab', cmd: 'lab {path} -T node_modules/lab-babel'},
       {runner: 'ava', cmd: 'ava {path} --concurrency=4'},
